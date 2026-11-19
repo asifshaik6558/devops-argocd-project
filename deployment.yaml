@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flashdeals
+  namespace: default
+  labels:
+    app: flashdeals
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: flashdeals
+
+  template:
+    metadata:
+      labels:
+        app: flashdeals
+
+    spec:
+      containers:
+        - name: flashdeals
+          image: asifshaik6558/flashdeals:v1
+          imagePullPolicy: IfNotPresent
+
+          ports:
+            - containerPort: 80
+              name: http
+
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
